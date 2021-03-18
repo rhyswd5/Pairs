@@ -1,0 +1,179 @@
+//create an object of all cards in a deck
+const cards = [
+  { name: "card AS", image: "../../images/AS.jpg" },
+  { name: "card AC", image: "../../images/AC.jpg" },
+  { name: "card AH", image: "../../images/AH.jpg" },
+  { name: "card AD", image: "../../images/AD.jpg" },
+  { name: "card 2S", image: "../../images/2S.jpg" },
+  { name: "card 2C", image: "../../images/2C.jpg" },
+  { name: "card 2H", image: "../../images/2H.jpg" },
+  { name: "card 2D", image: "../../images/2D.jpg" },
+  { name: "card 3S", image: "../../images/3S.jpg" },
+  { name: "card 3C", image: "../../images/3C.jpg" },
+  { name: "card 3H", image: "../../images/3H.jpg" },
+  { name: "card 3D", image: "../../images/3D.jpg" },
+  { name: "card 4S", image: "../../images/4S.jpg" },
+  { name: "card 4C", image: "../../images/4H.jpg" },
+  { name: "card 4H", image: "../../images/4H.jpg" },
+  { name: "card 4D", image: "../../images/4D.jpg" },
+  { name: "card 5S", image: "../../images/5S.jpg" },
+  { name: "card 5C", image: "../../images/5C.jpg" },
+  { name: "card 5H", image: "../../images/5H.jpg" },
+  { name: "card 5D", image: "../../images/5D.jpg" },
+  { name: "card 6S", image: "../../images/6S.jpg" },
+  { name: "card 6C", image: "../../images/6C.jpg" },
+  { name: "card 6H", image: "../../images/6H.jpg" },
+  { name: "card 6D", image: "../../images/6D.jpg" },
+  { name: "card 7S", image: "../../images/7S.jpg" },
+  { name: "card 7C", image: "../../images/7C.jpg" },
+  { name: "card 7H", image: "../../images/7H.jpg" },
+  { name: "card 7D", image: "../../images/7D.jpg" },
+  { name: "card 8S", image: "../../images/8S.jpg" },
+  { name: "card 8C", image: "../../images/8C.jpg" },
+  { name: "card 8H", image: "../../images/8H.jpg" },
+  { name: "card 8D", image: "../../images/8D.jpg" },
+  { name: "card 9S", image: "../../images/9S.jpg" },
+  { name: "card 9C", image: "../../images/9C.jpg" },
+  { name: "card 9H", image: "../../images/9H.jpg" },
+  { name: "card 9D", image: "../../images/9D.jpg" },
+  { name: "card 10S", image: "../../images/10S.jpg" },
+  { name: "card 10C", image: "../../images/10C.jpg" },
+  { name: "card 10H", image: "../../images/10H.jpg" },
+  { name: "card 10D", image: "../../images/10D.jpg" },
+  { name: "card JS", image: "../../images/JS.jpg" },
+  { name: "card JC", image: "../../images/JC.jpg" },
+  { name: "card JH", image: "../../images/JH.jpg" },
+  { name: "card JD", image: "../../images/JD.jpg" },
+  { name: "card QS", image: "../../images/QS.jpg" },
+  { name: "card QC", image: "../../images/QC.jpg" },
+  { name: "card QH", image: "../../images/QH.jpg" },
+  { name: "card QD", image: "../../images/QD.jpg" },
+  { name: "card KS", image: "../../images/KS.jpg" },
+  { name: "card KC", image: "../../images/KC.jpg" },
+  { name: "card KH", image: "../../images/KH.jpg" },
+  { name: "card KD", image: "../../images/KD.jpg" },
+];
+
+let boardCards = [];
+let cardsSelected = [];
+let pairs = 0;
+
+//create variables for each difficulty
+const easy = () => {
+  setUp();
+  lives = 5;
+  cardNumber = 8;
+  createBoard();
+};
+
+const medium = () => {
+  setUp();
+  lives = 10;
+  cardNumber = 16;
+  createBoard();
+};
+
+const hard = () => {
+  setUp();
+  lives = 20;
+  cardNumber = 32;
+  createBoard();
+};
+
+const setUp = () => {
+  document.querySelector("#difficulty").style.display = "none";
+  document.querySelector("footer").style.display = "flex";
+  document.querySelector("#container").style.display = "grid";
+};
+
+//function to shuffle the array of cards
+function shuffle(array) {
+  var currentIndex = boardCards.length,
+    temporaryValue,
+    randomIndex;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = boardCards[currentIndex];
+    boardCards[currentIndex] = boardCards[randomIndex];
+    boardCards[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+//creates array of a number of random cards (based on difficulty) from deck
+const createBoard = () => {
+  for (i = 0; i < cardNumber / 2; i++) {
+    card = cards[Math.floor(Math.random() * 52)];
+    boardCards.push(card, card);
+  }
+  shuffle(boardCards);
+  for (i = 0; i < cardNumber; i++) {
+    document
+      .querySelector(`#container`)
+      .insertAdjacentHTML(
+        "afterbegin",
+        `<div class='card' id='${i}' onclick=cardSelect(this)><img id='image${i}' src='../../images/card-back.png' /></div>`
+      );
+  }
+  document.querySelector("#lives").innerHTML = `Lives: ${lives}`;
+  let pairs = 0;
+};
+
+//when card is selected it is flipped and then turned over again if two are chosen that do not match
+const cardSelect = (card) => {
+  const id = card.id;
+  card.setAttribute("class", boardCards[id]["name"]);
+  document
+    .querySelector(`#image${id}`)
+    .setAttribute("src", boardCards[id]["image"]);
+  cardsSelected.push(card);
+  if (cardsSelected.length === 2) {
+    checkCards();
+  }
+};
+
+//checks if the chosen cards match each other and if the game is won/lost
+const checkCards = () => {
+  const id1 = cardsSelected[0].id;
+  const id2 = cardsSelected[1].id;
+  if (cardsSelected[1].className === cardsSelected[0].className && id1 != id2) {
+    pairs++;
+  } else {
+    setTimeout(() => {
+      document
+        .querySelector(`#image${id1}`)
+        .setAttribute("src", "../../images/card-back.png");
+      document
+        .querySelector(`#image${id2}`)
+        .setAttribute("src", "../../images/card-back.png");
+    }, 1000);
+    lives--;
+    document.querySelector("#lives").innerHTML = `Lives: ${lives}`;
+  }
+  cardsSelected = [];
+  console.log(cardsSelected);
+  if (lives == 0) {
+    setTimeout(alert("You Lose!"), 300);
+    reset();
+  } else if (pairs == cardNumber / 2) {
+    setTimeout(alert("You Win!"), 300);
+    reset();
+  }
+};
+
+//resets the game
+const reset = () => {
+  document.querySelector("#difficulty").style.display = "block";
+  document.querySelector("footer").style.display = "none";
+  document.querySelectorAll(".card").forEach((card) => {
+    card.remove();
+  });
+  document.querySelector("#container").style.display = "none";
+
+  boardCards = [];
+  cardsSelected = [];
+  pairs = 0;
+};
