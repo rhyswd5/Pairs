@@ -1,0 +1,135 @@
+body {
+  background: linear-gradient(60deg, #2a9d8f, #e9c46a, #e76f51);
+  background-size: 400% 400%;
+  animation: gradient 20s linear infinite;
+  background-repeat: no-repeat;
+  text-align: center;
+  font-family: "Montserrat";
+  min-height: 100vh;
+  height: 100%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  55% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#header {
+  text-align: left;
+}
+
+#home {
+  font-size: 3rem;
+  color: #eee;
+  transition: transform 300ms ease;
+  align-self: top;
+  margin: 2rem;
+}
+
+#home:hover {
+  transform: scale(1.1);
+}
+
+#difficulty {
+  padding: 5vh 0;
+}
+
+#i {
+  color: red;
+}
+.btn {
+  background: #ccd;
+  font-size: 2rem;
+  margin: 5vh;
+  padding: 1vw;
+  box-shadow: 1vh 1vh 0.5vh;
+  width: 15vw;
+  transition: transform 400ms ease, box-shadow 400ms ease;
+}
+
+.btn:hover {
+  transform: translate(0.2vw, 0.2vh);
+  box-shadow: 0.3vh 0.3vh 0.1vh;
+}
+
+.btn:active {
+  background: linear-gradient(0deg, #ddd, #999);
+}
+
+#container {
+  display: none;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+  justify-content: space-around;
+  grid-gap: 3rem;
+  margin: 5vh 5vh 0 5vh;
+  align-content: center;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  border: solid 0px black;
+  border-radius: 0.5vw;
+  transition: transform 300ms ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0.5vh 0.5vh 1vh 0.2vh;
+  z-index: 3;
+}
+.card {
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+#lives {
+  color: #555;
+  font-size: 2rem;
+}
+
+footer {
+  display: none;
+  justify-content: space-between;
+  margin: 8vh 5vw 5vh 5vw;
+}
+
+#reset {
+  font-size: 1rem;
+  margin: 0;
+  width: auto;
+}
+
+@media (max-width: 1100px) {
+  .btn {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .btn {
+    font-size: 1rem;
+  }
+  #container {
+    grid-gap: 2rem;
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .btn {
+    font-size: 0.6rem;
+  }
+  #container {
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 1.5rem;
+  }
+}
