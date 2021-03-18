@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      src="https://kit.fontawesome.com/6da2e14f43.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+    />
+    <link rel="stylesheet" href="pairs.css" />
+  </head>
+  <body>
+    <header id="header">
+      <a href="games.html" id="home"><i class="fas fa-home"></i></a>
+    </header>
+    <div id="difficulty">
+      <button id="easy" class="btn" onclick="easy()">
+        <strong>Easy</strong>
+      </button>
+      <br />
+      <button id="Hedium" class="btn" onclick="medium()">
+        <strong>Medium</strong>
+      </button>
+      <br />
+      <button id="Hard" class="btn" onclick="hard()">
+        <strong>Hard</strong>
+      </button>
+    </div>
+    <div id="container"></div>
+    <footer>
+      <div id="lives"></div>
+      <button class="btn" id="reset" onclick="reset()">
+        <strong>Reset</strong>
+      </button>
+    </footer>
+    <script src="pairs.js"></script>
+  </body>
+</html>
